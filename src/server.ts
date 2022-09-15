@@ -1,10 +1,19 @@
-import express, { json } from 'express';
+import express from 'express';
+import cors from 'cors';
+
 import { PrismaClient } from '@prisma/client';
 import { convertHourStringToMinutes } from './utils/convert-hour-string-to-minutes';
 import { convertMinutesToHourString } from './utils/convert-minutes-to-hour-string';
 
 const app = express();
 app.use(express.json());
+// com o cors posso expecificar qual o dominio de front end q pode usar 
+// esse backend colocando por exemplo:
+// app.use(cors({
+//  origin : 'http://rocketseat.com.br'
+// }));
+// colocando da forma abaixo todos os front end consegue usar 
+app.use(cors());
 
 const prisma = new PrismaClient({
     // pra aparecer no terminal as queries, quando for feita uma.
